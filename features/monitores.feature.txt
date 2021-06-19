@@ -6,3 +6,10 @@ And: vejo o monitor “Lucas Silva” com CPF “14323456700”
 When: cadastro o monitor “Bruno Martins” com CPF “14323456700”
 Then: vejo uma mensagem de erro
 And:  estou na página “Cadastrar Monitor”
+
+Scenario: Cadastro de monitor com CPF inválido
+Given: estou na página “Turma”
+And: vejo o monitor “Lucas Silva” com CPF “14323456700”
+When: cadastro o monitor “Bruno Martins” com CPF “2”
+Then: vejo uma mensagem de erro
+And:  estou na página “Cadastrar Monitor”
