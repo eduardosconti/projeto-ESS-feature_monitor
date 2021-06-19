@@ -1,4 +1,4 @@
-Scenario: Atualização de monitor com sucesso
+Scenario: Atualização de monitor com sucesso.
 Given: estou na página “Turma”
 And: vejo o monitor “Lucas Sival” com CPF “14323456700”
 When: atualizo monitor “Lucas Silva” com CPF “14323456700”
