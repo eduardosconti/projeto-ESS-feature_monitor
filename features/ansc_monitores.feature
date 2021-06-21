@@ -22,7 +22,7 @@ When: cadastro o monitor “Lucas Silva”
 Then:vejo uma mensagem de erro
 And:  estou na página “Cadastrar Monitor”
 
-//Cenário por bruno Martins
+//Cenário por Bruno Martins
 
 Scenario: Atualização de monitor com falta de informação
 Given: estou na página “Turma”
@@ -30,3 +30,12 @@ And: vejo o monitor “Lucas Silva" com CPF “14323456700”
 When: atualizo monitor “Lucas Silva” com CPF “”
 Then: vejo uma mensagem de erro
 And:  estou na página “Atualizar Monitor”
+
+//Cenário de Eduardo Conti
+
+Scenario: Remoção de monitor com sucesso
+Given: estou na página “Turma”
+And: vejo o monitor “Lucas Silva" com CPF “14323456700”
+When: removo monitor “Lucas Silva” com CPF “14323456700”
+Then: vejo uma mensagem de confirmação
+And: não vejo “Lucas Silva” com CPF “14323456700” em “Monitores”
