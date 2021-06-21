@@ -21,3 +21,12 @@ And: não vejo o monitor “Lucas Silva” com CPF “14323456700”
 When: cadastro o monitor “Lucas Silva” 
 Then:vejo uma mensagem de erro
 And:  estou na página “Cadastrar Monitor”
+
+//Cenário por bruno Martins
+
+Scenario: Atualização de monitor com falta de informação
+Given: estou na página “Turma”
+And: vejo o monitor “Lucas Silva" com CPF “14323456700”
+When: atualizo monitor “Lucas Silva” com CPF “”
+Then: vejo uma mensagem de erro
+And:  estou na página “Atualizar Monitor”
