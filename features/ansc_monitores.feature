@@ -44,8 +44,8 @@ And: não vejo “Lucas Silva” com CPF “14323456700” em “Monitores”
 
 Scenario: Atualização de monitor com sucesso
 Given: estou na página “Turma”
-And: vejo o monitor “Lucas Sival” com CPF “14323456700”
-When: atualizo monitor “Lucas Silva” com CPF “14323456700”
+And: vejo o monitor “Lucas Sival” com CPF “14323456701”
+When: atualizo monitor “Lucas Silva” com CPF “14323456701”
 Then: vejo uma mensagem de confirmação
 And:  estou na página “Turma”
-And:  vejo “Lucas Silva” com CPF “14323456700” em “Monitores”
+And:  vejo “Lucas Silva” com CPF “14323456701” em “Monitores”
