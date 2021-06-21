@@ -22,7 +22,7 @@ When: cadastro o monitor “Lucas Silva”
 Then:vejo uma mensagem de erro
 And:  estou na página “Cadastrar Monitor”
 
-//Cenário por bruno Martins
+//Cenário por Bruno Martins
 
 Scenario: Atualização de monitor com falta de informação
 Given: estou na página “Turma”
