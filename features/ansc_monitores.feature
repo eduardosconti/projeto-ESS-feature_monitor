@@ -39,3 +39,13 @@ And: vejo o monitor “Lucas Silva" com CPF “14323456700”
 When: removo monitor “Lucas Silva” com CPF “14323456700”
 Then: vejo uma mensagem de confirmação
 And: não vejo “Lucas Silva” com CPF “14323456700” em “Monitores”
+
+//Cenario por Amanda Santiago
+
+Scenario: Atualização de monitor com sucesso
+Given: estou na página “Turma”
+And: vejo o monitor “Lucas Sival” com CPF “14323456700”
+When: atualizo monitor “Lucas Silva” com CPF “14323456700”
+Then: vejo uma mensagem de confirmação
+And:  estou na página “Turma”
+And:  vejo “Lucas Silva” com CPF “14323456700” em “Monitores”
