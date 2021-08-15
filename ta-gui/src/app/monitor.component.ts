@@ -24,9 +24,8 @@ export class MonitoresComponent implements OnInit{
             .subscribe(
                 ar => {
                     if (ar) {
-                        ar.alunos = [];
-                        this.listaAlunos(ar);
                         this.monitores.push(ar);
+                        this.listaAlunos();
                         this.monitor = new Monitor(); 
                    } else {
                         this.cpfDuplicado = true;
@@ -39,11 +38,27 @@ export class MonitoresComponent implements OnInit{
         this.cpfDuplicado =false;
     }
 
-    listaAlunos(a:Monitor): void {
-        this.alunosService.getAlunos().subscribe(
-            (as) => {for (let al of as){
-                a.alunos = a.alunos.concat(al.nome);
-            }
+    listaAlunos(): void {
+        let arrAluno = this.alunosService.getAlunos();
+        
+        arrAluno.subscribe(
+            (as) => {
+                let aux = as.reverse();
+                let tamanhoA = aux.length;
+                let monRestantes = this.monitores.length;
+                let aPerm = Math.ceil(tamanhoA/monRestantes);
+                if (tamanhoA > 0){
+                    for (let mon of this.monitores) {
+                        tamanhoA = aux.length;
+                        console.log(aux)
+                        aPerm = Math.ceil(tamanhoA/monRestantes);
+                        for (let i = 0; i < aPerm; i++) {
+                            mon.alunos = mon.alunos.concat(aux.pop().nome); 
+                            console.log(mon.alunos)
+                        }
+                        monRestantes -=1;
+                    }
+                }
         },(msg) => {alert(msg.message);}
         )
     }
