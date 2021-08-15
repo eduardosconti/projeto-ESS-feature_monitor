@@ -49,6 +49,7 @@ export class MonitoresComponent implements OnInit{
                 let aPerm = Math.ceil(tamanhoA/monRestantes);
                 if (tamanhoA > 0){
                     for (let mon of this.monitores) {
+                        mon.alunos = [];
                         tamanhoA = aux.length;
                         console.log(aux)
                         aPerm = Math.ceil(tamanhoA/monRestantes);
