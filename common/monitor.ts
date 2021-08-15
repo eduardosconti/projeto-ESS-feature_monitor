@@ -8,10 +8,6 @@ export class Monitor extends Aluno{
         this.clean
     }
     clean(): void{
-        //this.nome = "";
-        //this.cpf = "";
-        //this.email = "";
-        //this.github = "";
         this.alunos = new Array<string>();
     }
 
