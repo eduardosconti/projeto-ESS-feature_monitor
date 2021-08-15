@@ -12,7 +12,7 @@ export class Monitor extends Aluno{
         //this.cpf = "";
         //this.email = "";
         //this.github = "";
-        this.alunos = [];
+        this.alunos = new Array<string>();
     }
 
 
