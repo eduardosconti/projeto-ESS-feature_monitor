@@ -1,0 +1,43 @@
+<html (mousemove)="onMove()">
+
+   <table>
+      <tr>
+         <td><label>Nome </label></td>
+         <td><input [(ngModel)]="monitor.nome" name ="namebox" ></td>
+         <td><button (click)="criarMonitor(monitor)">Adicionar</button></td>
+      </tr>
+      <tr>
+         <td><label>CPF </label></td>
+         <td><input type="number" [(ngModel)]="monitor.cpf" min = 0 name = "cpfbox"></td>
+         <td *ngIf="cpfDuplicado">
+           Já existe um monitor com esse CPF
+         </td>
+      </tr> 
+      <tr>
+         <td><label>e-mail </label></td>
+         <td><input [(ngModel)]="monitor.email" name = "emailbox"></td>
+      </tr>
+      <tr>
+        <td><label>github </label></td>
+        <td><input [(ngModel)]="monitor.github" name = "githubbox"></td>
+      </tr>
+      </table>
+      
+      <table>
+      <tr *ngIf="monitores.length > 0">
+         <th>Nome</th>
+         <th>CPF</th>
+         <th>e-mail</th>
+         <th>github</th>
+         <th>Alunos</th>
+      </tr>
+      <tr *ngFor="let a of monitores">
+         <td name = "nomelist">{{a.nome}}</td>
+         <td name = "cpflist">{{a.cpf}}</td>
+         <td name = "emaillist">{{a.email}}</td>
+         <td name = "githbulist">{{a.github}}</td>
+         <td name = "listaAlunos">{{a.alunos}}</td>
+      </tr>
+      </table>
+      
+      </html>

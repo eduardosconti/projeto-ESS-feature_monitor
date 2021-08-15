@@ -4,9 +4,13 @@ import bodyParser = require("body-parser");
 import {Aluno} from '../common/aluno';
 import {CadastroDeAlunos} from './cadastrodealunos';
 
+import {Monitor} from '../common/monitor';
+import { CadastroDeMonitores } from './cadastrodemonitores';
+
 var taserver = express();
 
 var cadastro: CadastroDeAlunos = new CadastroDeAlunos();
+var cadastrom: CadastroDeMonitores = new CadastroDeMonitores();
 
 var allowCrossDomain = function(req: any, res: any, next: any) {
     res.header('Access-Control-Allow-Origin', "*");
@@ -22,13 +26,27 @@ taserver.get('/alunos', function (req: express.Request, res: express.Response) {
   res.send(JSON.stringify(cadastro.getAlunos()));
 })
 
+taserver.get('/monitores', function (req: express.Request, res: express.Response) {
+  res.send(JSON.stringify(cadastrom.getMonitores()));
+})
+
 taserver.post('/aluno', function (req: express.Request, res: express.Response) {
-  var aluno: Aluno = <Aluno> req.body; //verificar se é mesmo Aluno!
+  var aluno: Aluno = <Aluno> req.body; //verificar se ï¿½ mesmo Aluno!
   aluno = cadastro.cadastrar(aluno);
   if (aluno) {
     res.send({"success": "O aluno foi cadastrado com sucesso"});
   } else {
-    res.send({"failure": "O aluno não pode ser cadastrado"});
+    res.send({"failure": "O aluno nao pode ser cadastrado"});
+  }
+})
+
+taserver.post('/monitores', function (req: express.Request, res: express.Response) {
+  var monitor: Monitor = <Monitor> req.body;
+  monitor = cadastrom.cadastrar(monitor);
+  if (monitor) {
+    res.send({"success": "O monitor foi cadastrado com sucesso"});
+  } else {
+    res.send({"failure": "O monitor nao pode ser cadastrado"});
   }
 })
 
@@ -38,7 +56,17 @@ taserver.put('/aluno', function (req: express.Request, res: express.Response) {
   if (aluno) {
     res.send({"success": "O aluno foi atualizado com sucesso"});
   } else {
-    res.send({"failure": "O aluno não pode ser atualizado"});
+    res.send({"failure": "O aluno nao pode ser atualizado"});
+  }
+})
+
+taserver.put('/monitores', function (req: express.Request, res: express.Response) {
+  var monitor: Monitor = <Monitor> req.body;
+  monitor = cadastrom.atualizar(monitor);
+  if (monitor) {
+    res.send({"success": "O monitor foi atualizado com sucesso"});
+  } else {
+    res.send({"failure": "O monitor nao pode ser atualizado"});
   }
 })
 
