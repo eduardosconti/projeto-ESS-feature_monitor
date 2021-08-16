@@ -22,7 +22,8 @@ export class MonitorService {
   }
 
   atualizar(monitor: Monitor): Observable<Monitor> {
-    return this.http.put<any>(this.taURL + "/monitores",JSON.stringify(monitor), {headers: this.headers})          .pipe( 
+    return this.http.put<any>(this.taURL + "/monitores",JSON.stringify(monitor), {headers: this.headers})          
+              .pipe( 
                 retry(2),
                 map( res => {if (res.success) {return monitor;} else {return null;}} )
               ); 

@@ -1,7 +1,7 @@
 import { Aluno } from '../common/aluno';
 
 export class CadastroDeAlunos {
-   alunos: Aluno[] = [];
+  alunos: Aluno[] = [];
 
     cadastrar(aluno: Aluno): Aluno {
      var result = null;
@@ -28,6 +28,6 @@ export class CadastroDeAlunos {
    }
 
     getAlunos(): Aluno[] {
-     return this.alunos;
+      return this.alunos;
    }
 }

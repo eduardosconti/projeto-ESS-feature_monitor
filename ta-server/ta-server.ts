@@ -27,7 +27,8 @@ taserver.get('/alunos', function (req: express.Request, res: express.Response) {
 })
 
 taserver.get('/monitores', function (req: express.Request, res: express.Response) {
-  res.send(JSON.stringify(cadastrom.getMonitores()));
+  var lista = cadastro.getAlunos();
+  res.send(JSON.stringify(cadastrom.getMonitores(lista)));
 })
 
 taserver.post('/aluno', function (req: express.Request, res: express.Response) {
