@@ -1,9 +1,9 @@
 import time
 from selenium import webdriver
-from webdriver_manager.microsoft import EdgeChromiumDriverManager
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
 
-driver = webdriver.Edge(EdgeChromiumDriverManager().install())  # Optional argument, if not specified will search path.
+driver = webdriver.Chrome(ChromeDriverManager().install())  # Optional argument, if not specified will search path.
 driver.get('http://localhost:4200/')
 #time.sleep(5) # Let the user actually see something!
 element = driver.find_element_by_name('alunos')

@@ -1,11 +1,11 @@
-.alunos {
+.monitor {
     margin: 0 0 2em 0;
     list-style-type: none;
     padding: 0;
     width: 20em;
   }
    
-  .alunos li {
+  .monitores {
     cursor: pointer;
     position: relative;
     left: 0;
@@ -27,4 +27,8 @@
   }
   button:hover {
     background-color: lightpink;
+  }
+
+  table,th,td{
+    border: 1px salmon;
   }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { Monitor } from "../../../common/monitor";
-import { Aluno } from "../../../common/aluno";
 import { MonitorService } from './monitor.service';
 import { AlunoService } from "./aluno.service";
 
@@ -33,6 +32,18 @@ export class MonitoresComponent implements OnInit{
                 },
                 msg => {alert(msg.message);}
             )
+        }
+
+    removerMonitor(a: Monitor):void {
+        this.monitoresService.atualizar(a).subscribe(
+            ad => {
+                if (ad) {
+                    var result : Monitor = this.monitores.find(k => k.cpf == a.cpf);
+                    this.monitores.splice(this.monitores.indexOf(result),1);
+                    this.listaAlunos();
+                }
+            }
+        )
     }
     onMove(): void {
         this.cpfDuplicado =false;
@@ -71,4 +82,12 @@ export class MonitoresComponent implements OnInit{
             msg => { alert(msg.message); }
         );
     }
+     esconderCadastro() {
+        var x = document.getElementById("divCadastro");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
 }

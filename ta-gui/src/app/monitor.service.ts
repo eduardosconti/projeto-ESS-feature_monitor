@@ -21,6 +21,15 @@ export class MonitorService {
               ); 
   }
 
+  /*deletar(monitor: Monitor): Promise<Monitor> {
+    return this.http.put<any> (this.taURL + "/monitores",JSON.stringify(monitor), {headers: this.headers})
+         .toPromise()
+         .then(res => {
+            if (res.json().success) {return monitor;} else {return null;}
+         })
+         .catch(this.tratarErro);
+  }*/
+
   atualizar(monitor: Monitor): Observable<Monitor> {
     return this.http.put<any>(this.taURL + "/monitores",JSON.stringify(monitor), {headers: this.headers})          
               .pipe( 
@@ -36,4 +45,8 @@ export class MonitorService {
                );
   }
 
+  private tratarErro(erro: any): Promise<any>{
+    console.error('Acesso mal sucedido ao serviço de monitores',erro);
+    return Promise.reject(erro.message || erro);
+  }
 }
