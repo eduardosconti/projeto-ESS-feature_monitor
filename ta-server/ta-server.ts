@@ -53,7 +53,7 @@ taserver.post('/monitores', function (req: express.Request, res: express.Respons
 
 taserver.put('/monitores',function(req:express.Request,res:express.Response){
   var monitor : Monitor = <Monitor> req.body;
-  monitor = cadastrom.remover(monitor)
+  cadastrom.remover(monitor)
   if (monitor){
     res.send({"success": "O Monitor foi removido com sucesso"});
   } else {

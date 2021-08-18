@@ -14,13 +14,12 @@ export class CadastroDeMonitores {
         }
         return result;
     }
-    remover (monitor: Monitor): Monitor {
+    remover (monitor: Monitor): void {
         var result = null;
         if (!this.cpfNaoCadastrado(monitor.cpf)){
             var aux : Monitor = this.monitores.find(k => k.cpf == monitor.cpf);
-                    this.monitores.splice(this.monitores.indexOf(aux),1);
+            this.monitores.splice(this.monitores.indexOf(aux),1);
         }
-        return result;
     }
 
     cpfNaoCadastrado(cpf: string): boolean {
