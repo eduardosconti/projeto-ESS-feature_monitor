@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MetasComponent } from './metas.component';
 import { AlunosComponent } from './alunos.component';
 import { MonitoresComponent } from './monitor.component';
 import { AlunoService } from './aluno.service';
@@ -15,7 +14,6 @@ import { MonitorService } from './monitor.service';
 @NgModule({
   declarations: [
     AppComponent,
-    MetasComponent,
     AlunosComponent,
     MonitoresComponent
   ],
@@ -25,10 +23,6 @@ import { MonitorService } from './monitor.service';
     FormsModule,
     HttpClientModule, 
     RouterModule.forRoot([
-      {
-        path: 'metas',
-        component: MetasComponent
-      },
       {
         path: 'alunos',
         component: AlunosComponent

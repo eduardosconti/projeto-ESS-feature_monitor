@@ -33,7 +33,7 @@ export class CadastroDeMonitores {
      }
   
     getMonitores(lista: Aluno[]): Monitor[] {
-        this.listaAlunos(lista)
+        this.listaAlunos(lista);
         return this.monitores;
      }
      
