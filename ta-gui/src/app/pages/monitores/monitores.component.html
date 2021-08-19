@@ -1,0 +1,66 @@
+<button (click)="esconderCadastro()">Cadastro</button>
+
+<div id="divCadastro">
+  <table>
+    <tr>
+      <td><label>Nome </label></td>
+      <td><input [(ngModel)]="monitor.nome" name="namebox" id="namebox" /></td>
+      <td>
+        <button (click)="criarMonitor(monitor)" id="criarMonitor">
+          Adicionar
+        </button>
+      </td>
+    </tr>
+    <tr>
+      <td><label>CPF </label></td>
+      <td>
+        <input
+          type="number"
+          [(ngModel)]="monitor.cpf"
+          min="0"
+          name="cpfbox"
+          id="cpfbox"
+        />
+      </td>
+      <td *ngIf="cpfDuplicado">Já existe um monitor com esse CPF</td>
+    </tr>
+    <tr>
+      <td><label>e-mail </label></td>
+      <td>
+        <input [(ngModel)]="monitor.email" name="emailbox" id="emailbox" />
+      </td>
+    </tr>
+    <tr>
+      <td><label>github </label></td>
+      <td>
+        <input [(ngModel)]="monitor.github" name="githubbox" id="githubbox" />
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="tabelademonitores">
+  <table>
+    <tr *ngIf="monitores.length > 0">
+      <th>Nome</th>
+      <th>CPF</th>
+    </tr>
+    <tr *ngFor="let a of monitores">
+      <td name="nomelist">{{ a.nome }}</td>
+      <td name="cpflist">{{ a.cpf }}</td>
+      <td><button (click)="removerMonitor(a)">Remover</button></td>
+    </tr>
+  </table>
+</div>
+<div id="tabeladealunos">
+  <table>
+    <tr *ngIf="monitores.length > 0">
+      <th>Nome</th>
+      <th>Alunos</th>
+    </tr>
+    <tr *ngFor="let a of monitores">
+      <td name="nomelist">{{ a.nome }}</td>
+      <td name="alunoslist">{{ a.alunos }}</td>
+    </tr>
+  </table>
+</div>

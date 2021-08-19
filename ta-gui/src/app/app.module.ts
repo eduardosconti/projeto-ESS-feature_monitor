@@ -1,37 +1,26 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { RouterModule }   from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-
-import { AppRoutingModule } from './app-routing.module';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { AlunosComponent } from './alunos.component';
-import { MonitoresComponent } from './monitor.component';
-import { AlunoService } from './aluno.service';
-import { MonitorService } from './monitor.service';
+import { routes } from './app.routing';
+import { ComponentsModule } from './components/components.module';
+import { PagesModule } from './pages/pages.module';
+import { AlunoService } from './services/aluno.service';
+import { MonitorService } from './services/monitor.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    AlunosComponent,
-    MonitoresComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    FormsModule,
     HttpClientModule, 
-    RouterModule.forRoot([
-      {
-        path: 'alunos',
-        component: AlunosComponent
-      },
-      {
-        path: 'monitores',
-        component: MonitoresComponent
-      }
-    ])
+    ComponentsModule,
+    PagesModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [AlunoService, MonitorService],
   bootstrap: [AppComponent]

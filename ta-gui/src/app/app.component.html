@@ -1,14 +1,23 @@
-<html>
+<app-header></app-header>
+<br class="clearfix" />
+<section class="sec03">
+  <div class="container">
+    <div class="box-section">
+      <img
+        class="logo"
+        alt="Logo da empresa"
+        title="Aqui é apresentado a logo da empresa"
+        src="assets/img/logo1.png"
+      />
 
-<h1>
-  Turma
-</h1>
-
-<nav>
-    <a name="alunos" routerLink="/alunos" id="AlunoButton">Alunos</a> 
-    <a name="monitores" routerLink="/monitores" id="MonitorButton">Monitores</a>
-</nav>
-
-<router-outlet></router-outlet>
-
-</html>
+      <div class="box-buttons">
+        <a routerLink="alunos" class="btn_destaque"> Alunos</a>
+        <a routerLink="monitores" class="btn_destaque"> Monitores</a>
+      </div>
+      <router-outlet>
+      </router-outlet>
+    </div>
+  </div>
+</section>
+<br class="clearfix" />
+<app-footer></app-footer>
