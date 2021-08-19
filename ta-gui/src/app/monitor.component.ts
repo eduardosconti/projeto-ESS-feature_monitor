@@ -54,7 +54,9 @@ export class MonitoresComponent implements OnInit{
         
         arrAluno.subscribe(
             (as) => {
-                let aux = as.reverse();
+                this.monitores.sort((a, b) => (a.nome > b.nome) ? 1 : ((b.nome > a.nome) ? -1 : 0));
+                let aux = as.sort((a, b) => (a.nome > b.nome) ? 1 : ((b.nome > a.nome) ? -1 : 0));
+                aux = aux.reverse();
                 let tamanhoA = aux.length;
                 let monRestantes = this.monitores.length;
                 let aPerm = Math.ceil(tamanhoA/monRestantes);
