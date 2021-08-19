@@ -22,6 +22,14 @@ When: cadastro o monitor “Lucas Silva”
 Then:vejo uma mensagem de erro
 And:  estou na página “Cadastrar Monitor”
 
+//Cenário por Gislayne Vitorino
+Scenario: Cadastro de monitor com CPF existente
+Given: estou na página “Turma”
+And: vejo o monitor “Lucas Silva” com CPF “14323456700”
+When: cadastro o monitor “Bruno Martins” com CPF “14323456700”
+Then: vejo uma mensagem de erro
+And:  estou na página “Cadastrar Monitor”
+
 //Cenário por Bruno Martins
 
 Scenario: Atualização de monitor com falta de informação

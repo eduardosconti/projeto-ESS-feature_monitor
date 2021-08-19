@@ -6,8 +6,11 @@ export let config: Config = {
 
     SELENIUM_PROMISE_MANAGER: false,
 
-    capabilities: {
-        browserName: 'firefox'
+      capabilities: {
+            browserName: 'firefox',
+    'moz:firefoxOptions': {
+       'args': ['--headless']
+      }
     },
 
     framework: 'custom',
