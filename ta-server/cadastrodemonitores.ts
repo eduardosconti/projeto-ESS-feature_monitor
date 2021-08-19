@@ -35,13 +35,14 @@ export class CadastroDeMonitores {
     getMonitores(lista: Aluno[]): Monitor[] {
         this.listaAlunos(lista);
         return this.monitores;
-     }
-     
+    }
+    
     listaAlunos(arrAluno: Aluno[]): void {
-        let aux = arrAluno.reverse();
+        this.monitores.sort((a, b) => (a.nome > b.nome) ? 1 : ((b.nome > a.nome) ? -1 : 0));
+        let aux = arrAluno.sort((a, b) => (a.nome > b.nome) ? 1 : ((b.nome > a.nome) ? -1 : 0));
         let tamanhoA = aux.length;
         let monRestantes = this.monitores.length;
-        let n = 0
+        let n = 0;
         let aPerm = Math.ceil(tamanhoA/monRestantes);
         if (tamanhoA > 0){
             for (let mon of this.monitores) {

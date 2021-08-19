@@ -39,3 +39,5 @@ for i in range(3):
     element.click()
     time.sleep(1)
 
+driver.quit()
+
