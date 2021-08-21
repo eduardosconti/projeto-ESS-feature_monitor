@@ -10,6 +10,7 @@ Then vejo "Gislayne Vitorino" com CPF "14323456701" na lista de monitores
 
 Scenario: Cadastro de monitor com CPF existente
 Given estou na pagina de cadastro de monitor
-Given vejo o monitor "Bruno Martins" com CPF "14323456700"
+Given vejo o monitor "Bruno Martins" com CPF "14323456700" na lista de monitores
 When tento cadastrar o monitor "Lucas Silva" com CPF "14323456700"
-Then nao vejo o monitor "Lucas Silva" na lista de monitores
+Then nao vejo o monitor "Lucas Silva" com CPF "14323456700" na lista de monitores
+And vejo uma mensagem de erro

@@ -24,15 +24,15 @@ And:  estou na página “Cadastrar Monitor”
 
 //Cenário por Gislayne Vitorino
 Scenario: Cadastro de monitor com CPF existente
-Given: estou na página “Turma”
-And: vejo o monitor “Lucas Silva” com CPF “14323456700”
-When: cadastro o monitor “Bruno Martins” com CPF “14323456700”
-Then: vejo uma mensagem de erro
-And:  estou na página “Cadastrar Monitor”
+Given estou na pagina de cadastro de monitor
+Given vejo o monitor "Bruno Martins" com CPF "14323456700" na lista de monitores
+When tento cadastrar o monitor "Lucas Silva" com CPF "14323456700"
+Then nao vejo o monitor "Lucas Silva" com CPF "14323456700" na lista de monitores
+And vejo uma mensagem de erro
 
 //Cenário por Bruno Martins
 
-Scenario: Atualização de monitor com falta de informação
+Scenario: Atualização de monitor sem CPF
 Given: estou na página “Turma”
 And: vejo o monitor “Lucas Silva" com CPF “14323456700”
 When: atualizo monitor “Lucas Silva” com CPF “”
@@ -42,13 +42,12 @@ And:  estou na página “Atualizar Monitor”
 //Cenário de Eduardo Conti
 
 Scenario: Remoção de monitor com sucesso
-Given: estou na página “Turma”
-And: vejo o monitor “Lucas Silva" com CPF “14323456700”
-When: removo monitor “Lucas Silva” com CPF “14323456700”
-Then: vejo uma mensagem de confirmação
-And: não vejo “Lucas Silva” com CPF “14323456700” em “Monitores”
+Given estou na pagina de cadastro de monitor
+Given vejo o monitor "Lucas Silva" com CPF "14323456700"
+When tento remover o monitor "Lucas Silva" com CPF "14323456700"
+Then não vejo "Lucas Silva" com CPF "14323456700" na lista de monitores
 
-//Cenario por Amanda Santiago
+//Cenario de Amanda Santiago
 
 Scenario: Atualização de monitor com sucesso
 Given: estou na página “Turma”
@@ -57,3 +56,11 @@ When: atualizo monitor “Lucas Silva” com CPF “14323456701”
 Then: vejo uma mensagem de confirmação
 And:  estou na página “Turma”
 And:  vejo “Lucas Silva” com CPF “14323456701” em “Monitores”
+
+//Cenario de Amanda Santiago
+
+Scenario: Cadastro de monitor com CPF inválido
+Given estou na pagina de cadastro de monitor
+Given vejo o monitor "Lucas Silva" com CPF "14323456700" na lista de monitores
+When tento cadastrar o monitor "Bruno Martins" com CPF "2"
+Then nao vejo o monitor "Bruno Martins" com CPF "2" na lista de monitores

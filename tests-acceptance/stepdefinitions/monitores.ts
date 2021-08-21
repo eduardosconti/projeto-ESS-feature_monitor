@@ -13,18 +13,33 @@ defineSupportCode(function ({ Given, When, Then }) {
     });
 
     Given(/^nao vejo o monitor com CPF "(\d*)" na lista de monitores$/, async (cpf) => {
-        var allcpfs : ElementArrayFinder = element.all(by.name('cpflist'));
-        var samecpfs = allcpfs.filter(elem =>
-                                      elem.getText().then(text => text === cpf));
-        await samecpfs.then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(0));
+        const monitores = await element.all(by.name('monitorlist'))
+          .map(async (linhaMonitor) => {
+            return {
+              cpf: await linhaMonitor.element(by.name('cpflist')).getText(),
+            } 
+          }) as {cpf: string}[]
+    
+        expect(monitores.some(monitor => monitor.cpf == cpf)).to.equal(false);
     });
 
-    Given(/^vejo o monitor "([^\"]*)" com CPF "(\d*)"$/, async (name, cpf) => {
-        await $("input[name='namebox']").sendKeys(<string> name);
-        await $("input[name='cpfbox']").sendKeys(<string> cpf);
+    Given(/^vejo o monitor "([^\"]*)" com CPF "(\d*)" na lista de monitores$/, async (name, cpf) => {
+
+        await $("input[name='namebox']").sendKeys(name as string);
+        await $("input[name='cpfbox']").sendKeys(cpf as string);
         await element(by.buttonText('Adicionar')).click();
-        
-    });
+    
+        const monitores = await element.all(by.name('monitorlist'))
+          .map(async (linhaMonitor) => {
+            return {
+              cpf: await linhaMonitor.element(by.name('cpflist')).getText(),
+              name: await linhaMonitor.element(by.name('nomelist')).getText(),
+            } 
+          }) as {cpf: string, name: string}[]
+    
+        expect(monitores.some(monitor => monitor.cpf == cpf && monitor.name == name)).to.equal(true);
+      
+    })
     
     When(/^tento cadastrar o monitor "([^\"]*)" com CPF "(\d*)"$/, async (name, cpf) => {
         await $("input[name='namebox']").sendKeys(<string> name);
@@ -32,20 +47,34 @@ defineSupportCode(function ({ Given, When, Then }) {
         await element(by.buttonText('Adicionar')).click();
     });
     Then(/^vejo "([^\"]*)" com CPF "(\d*)" na lista de monitores$/, async (name, cpf) => {
-        var allcpfs : ElementArrayFinder = element.all(by.name('cpflist'));
-        var allnomes : ElementArrayFinder = element.all(by.name('nomelist'));
-        var samecpfs = allcpfs.filter(elem =>elem.getText().then(text => text === cpf));
-        var samenomes = allnomes.filter(elem =>elem.getText().then(text => text === name));
-
-        await allcpfs.filter(elem => pAND(samecpfs,samenomes)).then
-                   (elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
+  
+        const monitores = await element.all(by.name('monitorlist'))
+          .map(async (linhaMonitor) => {
+            return {
+              cpf: await linhaMonitor.element(by.name('cpflist')).getText(),
+              name: await linhaMonitor.element(by.name('nomelist')).getText(),
+            } 
+          }) as {cpf: string, name: string}[]
+    
+        expect(monitores.some(monitor => monitor.cpf == cpf && monitor.name == name)).to.equal(true);
   });
 
-    Then(/^nao vejo o monitor "([^\"]*)" na lista de monitores$/, async (name) => {
-        var allnomes : ElementArrayFinder = element.all(by.name('nomelist'));
-    var samenomes = allnomes.filter(elem =>
-                                  elem.getText().then(text => text === name));
-    await samenomes.then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(0));
+    Then(/^nao vejo o monitor "([^\"]*)" com CPF "(\d*)" na lista de monitores$/, async (name, cpf) => {
+  
+        const monitores = await element.all(by.name('monitorlist'))
+          .map(async (linhaMonitor) => {
+            return {
+              cpf: await linhaMonitor.element(by.name('cpflist')).getText(),
+              name: await linhaMonitor.element(by.name('nomelist')).getText(),
+            } 
+          }) as {cpf: string, name: string}[]
+    
+        expect(monitores.some(monitor => monitor.cpf == cpf && monitor.name == name)).to.equal(false);
+  });
+    Then(/^vejo uma mensagem de erro$/, async () => {
+
+        var allmsgs : ElementArrayFinder = element.all(by.name('msgcpfexistente'));
+        await allmsgs.then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
   });
 
 });
