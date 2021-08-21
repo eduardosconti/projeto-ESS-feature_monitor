@@ -46,6 +46,21 @@ defineSupportCode(function ({ Given, When, Then }) {
         await $("input[name='cpfbox']").sendKeys(<string> cpf);
         await element(by.buttonText('Adicionar')).click();
     });
+    When(/^tento remover o monitor "([^\"]*)" com CPF "(\d*)"$/, async (name, cpf) => {
+      //let list = element.all(by.name('monitorlist'));
+      //expect(list.get(0).getText()).toBe(name);
+      //await element(by.buttonText('Remover')).click();
+
+     // var elem = element.all(by.name('monitorlist')).first();
+     // await element(by.elem.buttonText('Remover')).click();
+
+      await element.all(by.buttonText('Remover')).first().click()
+  });
+
+  //let list = element.all(by.css('.numbers li'));
+
+//expect(list.get(2).getText()).toBe('Three');
+
     Then(/^vejo "([^\"]*)" com CPF "(\d*)" na lista de monitores$/, async (name, cpf) => {
   
         const monitores = await element.all(by.name('monitorlist'))
