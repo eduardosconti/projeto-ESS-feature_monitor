@@ -12,6 +12,8 @@ export class MonitoresComponent implements OnInit {
   monitor: Monitor = new Monitor();
   monitores: Monitor[] = [];
   cpfDuplicado: boolean = false;
+  cpfinvalido: boolean = false;
+  emailinvalido: boolean = false;
 
   constructor(
     private monitoresService: MonitorService,
@@ -19,20 +21,31 @@ export class MonitoresComponent implements OnInit {
   ) {}
 
   criarMonitor(a: Monitor): void {
-    this.monitoresService.criar(a).subscribe(
-      (ar) => {
-        if (ar) {
-          this.monitores.push(ar);
-          this.listaAlunos();
-          this.monitor = new Monitor();
-        } else {
-          this.cpfDuplicado = true;
+    if (this.cpfValido(a.cpf)){
+      if(this.emailValido(a.email)) {
+        this.monitoresService.criar(a).subscribe(
+          (ar) => {
+            if (ar) {
+              this.monitores.push(ar);
+              this.listaAlunos();
+              this.monitor = new Monitor();
+          } else {
+            this.cpfDuplicado = true;
+          }
+        },
+        (msg) => {
+          alert(msg.message);
         }
-      },
-      (msg) => {
-        alert(msg.message);
+        );
+      } else{
+
+        alert("ISSO NÃO É UM E-MAIL");
+        
       }
-    );
+    }else{
+      alert("ISSO NÃO É UM CPF");
+    }
+    
   }
 
   removerMonitor(a: Monitor): void {
@@ -83,6 +96,23 @@ export class MonitoresComponent implements OnInit {
     );
   }
 
+  cpfValido(cpf: string): boolean {
+    let a : number = +cpf;
+        if (a.toString().length == 11) {
+          return true;
+        } else {
+          return false;
+        }
+     }
+  
+  emailValido(email: string): boolean {
+      if (email.includes("@cin.ufpe.br")) {
+          return true;
+      } else {
+          return false;
+        }
+  }
+  
   ngOnInit(): void {
     this.monitoresService.getMonitores().subscribe(
       (as) => {
