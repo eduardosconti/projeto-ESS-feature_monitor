@@ -1,0 +1,42 @@
+<html (mousemove)="onMove()">
+
+   <table>
+      <tr>
+         <td><label>Nome </label></td>
+         <td><input [(ngModel)]="aluno.nome" name ="namebox" id="namebox"></td>
+         <td><button (click)="criarAluno(aluno)" id="criarAluno">Adicionar</button></td>
+      </tr>
+      <tr>
+         <td><label>CPF </label></td>
+         <td><input type="number" [(ngModel)]="aluno.cpf" min = 0 name = "cpfbox" id="cpfbox"></td>
+         <td *ngIf="cpfduplicado">
+           Já existe um aluno com esse CPF
+         </td>
+      </tr> 
+      <tr>
+         <td><label>e-mail </label></td>
+         <td><input [(ngModel)]="aluno.email" name = "emailbox" id="emailbox"></td>
+      </tr>
+      <tr>
+        <td><label>github </label></td>
+        <td><input [(ngModel)]="aluno.github" name = "githubbox" id="githubbox"></td>
+        <td *ngIf = "githubDup"> Já existe um aluno com esse Github</td>
+      </tr>
+      </table>
+      
+      <table>
+      <tr *ngIf="alunos.length > 0">
+         <th>Nome</th>
+         <th>CPF</th>
+         <th>e-mail</th>
+         <th>github</th>
+      </tr>
+      <tr *ngFor="let a of alunos">
+         <td name = "nomelist">{{a.nome}}</td>
+         <td name = "cpflist">{{a.cpf}}</td>
+         <td name = "emaillist">{{a.email}}</td>
+         <td name = "githbulist">{{a.github}}</td>
+      </tr>
+      </table>
+      
+      </html>
