@@ -12,6 +12,8 @@ export class AlunosComponent implements OnInit {
   alunos: Aluno[] = [];
   cpfduplicado: boolean = false;
   githubDup: boolean = false;
+  cpfinvalido: boolean = false;
+  emailinvalido: boolean = false;
 
   constructor(private alunoService: AlunoService) {}
 
@@ -34,6 +36,8 @@ export class AlunosComponent implements OnInit {
 
   onMove(): void {
     this.cpfduplicado = false;
+    this.cpfinvalido = false;
+    this.emailinvalido = false;
     this.githubDup = false;
   }
 
