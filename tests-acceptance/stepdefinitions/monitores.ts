@@ -61,6 +61,12 @@ defineSupportCode(function ({ Given, When, Then }) {
     await $("input[name='emailbox']").sendKeys(<string> email);
     await element(by.buttonText('Adicionar')).click();
   });
+  When(/^tento cadastrar um monitor sem nome com CPF "(\d*)" e email "([^\"]*)"$/, async (cpf, email) => {
+    await $("input[name='cpfbox']").sendKeys(<string> cpf);
+    await $("input[name='emailbox']").sendKeys(<string> email);
+    await element(by.buttonText('Adicionar')).click();
+  });
+  
   When(/^tento atualizar o monitor Gislayne Vitorino para "([^\"]*)" com CPF "(\d*)" e email "([^\"]*)"$/, async (name, cpf,email) => {
     await element(by.buttonText('Atualizar')).click();
     
@@ -114,5 +120,12 @@ defineSupportCode(function ({ Given, When, Then }) {
     await allmsgs.then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
     
 });
+Then(/^vejo uma  mensagem de erro$/, async () => {
+
+  var allmsgs : ElementArrayFinder = element.all(by.name('nomeinvalido'));
+  await allmsgs.then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
+  
+});
+
 });
 

@@ -22,6 +22,13 @@ When tento cadastrar o monitor "Lucas Silva" sem CPF e email "lucas@cin.ufpe.br"
 Then nao vejo o monitor "Lucas Silva" com CPF "14323456700" e email "lucas@cin.ufpe.br" na lista de monitores
 And vejo uma mensagem de  erro
 
+Scenario: Cadastro de monitor sem nome
+Given estou na pagina de monitor
+And nao vejo o monitor "Amanda Santiago" com CPF "13121075454" e email "amanda@cin.ufpe.br" na lista de monitores
+When tento cadastrar um monitor sem nome com CPF "13121075454" e email "amanda@cin.ufpe.br"
+Then nao vejo o monitor "Amanda Santiago" com CPF "13121075454" e email "amanda@cin.ufpe.br" na lista de monitores
+And vejo uma  mensagem de erro
+
 Scenario: Cadastro de monitor com CPF invalido
 Given estou na pagina de monitor
 Given nao vejo o monitor "Lucas Silva" com CPF "14323456700" e email "lucas@cin.ufpe.br" na lista de monitores
