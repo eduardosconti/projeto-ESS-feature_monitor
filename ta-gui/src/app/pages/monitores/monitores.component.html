@@ -1,4 +1,38 @@
-<button (click)="esconderCadastro()">Cadastro</button>
+<table>
+  <tr>
+    <td><label>Nome </label></td>
+    <td><input [(ngModel)]="aluno.nome" name="namebox" id="namebox" /></td>
+    <td>
+      <button (click)="criarAluno(aluno)" id="criarAluno">Adicionar</button>
+    </td>
+  </tr>
+  <tr>
+    <td><label>CPF (apenas numeros)</label></td>
+    <td>
+      <input
+        type="number"
+        [(ngModel)]="aluno.cpf"
+        min="0"
+        name="cpfbox"
+        id="cpfbox"
+      />
+    </td>
+    <td *ngIf="cpfduplicado">Já existe um aluno com esse CPF</td>
+    <td *ngIf="cpfinvalido">Isso não é um CPF!</td>
+  </tr>
+  <tr>
+    <td><label>e-mail </label></td>
+    <td><input [(ngModel)]="aluno.email" name="emailbox" id="emailbox" /></td>
+    <td *ngIf="emailinvalido">Isso não é um e-mail!</td>
+  </tr>
+  <tr>
+    <td><label>github </label></td>
+    <td>
+      <input [(ngModel)]="aluno.github" name="githubbox" id="githubbox" />
+    </td>
+    <td *ngIf="githubDup">Já existe um aluno com esse Github</td>
+  </tr>
+</table>
 
 <div id="divCadastro" class="divCadastro" style="display: none;">
   <table>

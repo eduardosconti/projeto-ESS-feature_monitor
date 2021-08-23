@@ -7,7 +7,7 @@
     </td>
   </tr>
   <tr>
-    <td><label>CPF </label></td>
+    <td><label>CPF (apenas numeros)</label></td>
     <td>
       <input
         type="number"
@@ -18,10 +18,12 @@
       />
     </td>
     <td *ngIf="cpfduplicado">Já existe um aluno com esse CPF</td>
+    <td *ngIf="cpfinvalido">Isso não é um CPF!</td>
   </tr>
   <tr>
     <td><label>e-mail </label></td>
     <td><input [(ngModel)]="aluno.email" name="emailbox" id="emailbox" /></td>
+    <td *ngIf="emailinvalido">Isso não é um e-mail!</td>
   </tr>
   <tr>
     <td><label>github </label></td>
