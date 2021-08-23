@@ -4,7 +4,7 @@
   <table>
     <tr>
       <td><label>Nome </label></td>
-      <td><input [(ngModel)]="monitor.nome" name="namebox" id="namebox" /></td>
+      <td><input [(ngModel)]="monitor.nome" name="namebox" id="namebox"/></td>
       <td>
         <button (click)="criarMonitor(monitor)" id="criarMonitor">
           Adicionar
@@ -39,6 +39,7 @@
     </tr>
     <td name="msgcpfvalido" *ngIf="cpfinvalido"></td>
     <td name="emailinvalido" *ngIf="emailinvalido"></td>
+    <td name="nomeinvalido" *ngIf="semNome"></td>
   </table>
 
 

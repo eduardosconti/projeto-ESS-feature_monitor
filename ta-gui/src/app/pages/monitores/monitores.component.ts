@@ -18,6 +18,8 @@ export class MonitoresComponent implements OnInit {
   inserido: boolean = false;
   cpfinvalido: boolean = false;
   emailinvalido: boolean = false;
+  semNome: boolean = false;
+
 
   constructor(
     private monitoresService: MonitorService,
@@ -25,39 +27,45 @@ export class MonitoresComponent implements OnInit {
   ) {}
 
   criarMonitor(a: Monitor): void {
-    if (this.cpfValido(a.cpf)){
-      if(this.emailValido(a.email)) {
-        this.monitoresService.criar(a).subscribe(
-          (ar) => {
-            if (ar) {
-              this.monitores.push(ar);
-              this.listaAlunos();
-              this.monitor = new Monitor();
-              this.atualizando.push(false);
-              this.inserido = true;
-          } else {
-            this.cpfDuplicado = true;
-            alert("Já existe um aluno com esse CPF.")
+    if (a.nome.length > 0) {
+      if (this.cpfValido(a.cpf)){
+        if(this.emailValido(a.email)) {
+          this.monitoresService.criar(a).subscribe(
+            (ar) => {
+              if (ar) {
+                this.monitores.push(ar);
+                this.listaAlunos();
+                this.monitor = new Monitor();
+                this.atualizando.push(false);
+                this.inserido = true;
+            } else {
+              this.cpfDuplicado = true;
+              alert("Já existe um aluno com esse CPF.")
+            }
+          },
+          (msg) => {
+            alert(msg.message);
           }
-        },
-        (msg) => {
-          alert(msg.message);
+          );
+          this.cpfDuplicado = false;
+          this.inserido = false;
+        } else{
+          this.emailinvalido = true;
+          alert("Favor inserir um email válido.");
         }
-        );
-        this.cpfDuplicado = false;
-        this.inserido = false;
       } else{
-        this.emailinvalido = true;
-        alert("Favor inserir um email válido.");
+        this.cpfinvalido = true;
+        alert("Favor inserir um cpf válido.");
       }
-    } else{
-      this.cpfinvalido = true;
-      alert("Favor inserir um cpf válido.");
-    }
-    this.cpfinvalido = false;
-    this.emailinvalido = false;
-    
+      this.cpfinvalido = false;
+      this.emailinvalido = false;
+  } else {
+    this.semNome = true;
+    alert("Favor inserir nome do monitor.");
   }
+  this.semNome = false;
+
+}
 
   removerMonitor(a: Monitor): void {
     this.check = this.atualizando.some(v => v === true);
