@@ -7,6 +7,7 @@ import {CadastroDeAlunos} from './cadastrodealunos';
 import {Monitor} from '../common/monitor';
 import { CadastroDeMonitores } from './cadastrodemonitores';
 
+
 var taserver = express();
 
 var cadastro: CadastroDeAlunos = new CadastroDeAlunos();
@@ -51,16 +52,6 @@ taserver.post('/monitores', function (req: express.Request, res: express.Respons
   }
 })
 
-taserver.put('/monitores',function(req:express.Request,res:express.Response){
-  var monitor : Monitor = <Monitor> req.body;
-  cadastrom.remover(monitor)
-  if (monitor){
-    res.send({"success": "O Monitor foi removido com sucesso"});
-  } else {
-    res.send({"failure": "O Monitor nao pode ser encontrado"});
-  }
-})
-
 taserver.put('/aluno', function (req: express.Request, res: express.Response) {
   var aluno: Aluno = <Aluno> req.body;
   aluno = cadastro.atualizar(aluno);
@@ -71,15 +62,26 @@ taserver.put('/aluno', function (req: express.Request, res: express.Response) {
   }
 })
 
-taserver.put('/monitores', function (req: express.Request, res: express.Response) {
+taserver.put('/monitoresdeletar',function(req:express.Request,res:express.Response){
   var monitor: Monitor = <Monitor> req.body;
-  monitor = cadastrom.atualizar(monitor);
+  cadastrom.remover(monitor);
   if (monitor) {
     res.send({"success": "O monitor foi atualizado com sucesso"});
-  } else {
+  } else {  
     res.send({"failure": "O monitor nao pode ser atualizado"});
   }
 })
+
+taserver.put('/monitores', function (req: express.Request, res: express.Response) {
+  var monitor: Monitor = <Monitor> req.body;
+    monitor = cadastrom.atualizar(monitor);
+    if (monitor) {
+      res.send({"success": "O monitor foi atualizado com sucesso"});
+    } else {  
+      res.send({"failure": "O monitor nao pode ser atualizado"});
+    }
+  } 
+)
 
 taserver.listen(3000, function () {
   console.log('Example app listening on port 3000!')

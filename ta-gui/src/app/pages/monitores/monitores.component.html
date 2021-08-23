@@ -1,6 +1,6 @@
 <button (click)="esconderCadastro()">Cadastro</button>
 
-<div id="divCadastro">
+<div id="divCadastro" class="divCadastro" style="display: none;">
   <table>
     <tr>
       <td><label>Nome </label></td>
@@ -22,7 +22,7 @@
           id="cpfbox"
         />
       </td>
-      <td name="msgcpfexistente" *ngIf="cpfDuplicado">Já existe um monitor com esse CPF</td>
+      <td name="msgcpfexistente" *ngIf="cpfDuplicado"> </td>
     </tr>
     <tr>
       <td><label>e-mail </label></td>
@@ -37,6 +37,12 @@
       </td>
     </tr>
   </table>
+  <div class="alert" name="sucessocadastro" *ngIf="inserido">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    Monitor inserido com sucesso.
+  </div>
+
+
 </div>
 
 <div id="tabelademonitores">
@@ -44,14 +50,35 @@
     <tr *ngIf="monitores.length > 0">
       <th>Nome</th>
       <th>CPF</th>
+      <th>Email</th> 
     </tr>
-    <tr *ngFor="let a of monitores" name="monitorlist">
+    <tr *ngFor="let a of monitores; index as i "  name="monitorlist">
       <td name="nomelist">{{ a.nome }}</td>
       <td name="cpflist">{{ a.cpf }}</td>
+      <td name="emaillist">{{ a.email }}</td>
       <td><button (click)="removerMonitor(a)">Remover</button></td>
-    </tr>
+      <td><button (click)="atualizar(a,i)" class = "attButton" id = "attButton">Atualizar</button></td>
+      
+      
+      <div class="divAtualizar" *ngIf = "(!check || atualizando[i]) && a.cpf == attmonitor.cpf"> 
+        <tr>
+          <th>CPF</th>
+          <th>Nome</th>
+          <th>Email</th> 
+          <th>Github</th>
+        </tr>   
+        <tr>
+          <td>{{a.cpf}}</td>
+          <td><input [(ngModel)] ="attmonitor.nome"></td>
+          <td><input [(ngModel)]="attmonitor.email" ></td>
+          <td><input [(ngModel)]="attmonitor.github"></td>
+          <td><button id = "salvarMonitorButton" (click)="atualizarMonitor(attmonitor,a.cpf,i)">Salvar</button></td>
+        </tr>
+      </div>
+    </tr>  
   </table>
 </div>
+
 <div id="tabeladealunos">
   <table>
     <tr *ngIf="monitores.length > 0">
