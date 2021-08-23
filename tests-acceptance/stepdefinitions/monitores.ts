@@ -61,6 +61,17 @@ defineSupportCode(function ({ Given, When, Then }) {
     await $("input[name='emailbox']").sendKeys(<string> email);
     await element(by.buttonText('Adicionar')).click();
   });
+  When(/^tento atualizar o monitor Gislayne Vitorino para "([^\"]*)" com CPF "(\d*)" e email "([^\"]*)"$/, async (name, cpf,email) => {
+    await element(by.buttonText('Atualizar')).click();
+    
+    element(by.name("atualizaremailbox")).clear();
+    element(by.name("atualizarnamebox")).clear();
+    element(by.name("atualizarnamebox")).clear();
+
+    await $("input[name='atualizarnamebox']").sendKeys(<string> name);
+    await $("input[name='atualizaremailbox']").sendKeys(<string> email);
+    await element(by.buttonText('Salvar')).click();
+});
     
     Then(/^vejo "([^\"]*)" com CPF "(\d*)" e email "([^\"]*)" na lista de monitores$/, async (name, cpf, email) => {
   

@@ -34,3 +34,9 @@ Given estou na pagina de monitor
 Given vejo o monitor "Gislayne Vitorino" com CPF "14323456701" e email "gislayne@cin.ufpe.br" na lista de monitores
 When tento remover o monitor "Gislayne Vitorino" com CPF "14323456701" e email "gislayne@cin.ufpe.br"
 Then nao vejo o monitor "Gislayne Vitorino" com CPF "14323456701" e email "gislayne@cin.ufpe.br" na lista de monitores
+
+Scenario: Atualizacao de monitor com sucesso
+Given estou na pagina de monitor
+Given vejo o monitor "Gislayne Vitorino" com CPF "14323456701" e email "gislayne@cin.ufpe.br" na lista de monitores
+When tento atualizar o monitor Gislayne Vitorino para "Bruno Marcio" com CPF "14323456701" e email "bruno@cin.ufpe.br" 
+Then vejo "Bruno Marcio" com CPF "14323456701" e email "bruno@cin.ufpe.br" na lista de monitores

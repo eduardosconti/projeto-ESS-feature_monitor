@@ -72,10 +72,10 @@
           <th>Github</th>
         </tr>   
         <tr>
-          <td>{{a.cpf}}</td>
-          <td><input [(ngModel)] ="attmonitor.nome"></td>
-          <td><input [(ngModel)]="attmonitor.email" ></td>
-          <td><input [(ngModel)]="attmonitor.github"></td>
+          <td name="atualizarcpflist">{{a.cpf}}</td>
+          <td><input [(ngModel)] ="attmonitor.nome" name="atualizarnamebox"></td>
+          <td><input [(ngModel)]="attmonitor.email" name="atualizaremailbox"></td>
+          <td><input [(ngModel)]="attmonitor.github" name="atualizargithubbox"></td>
           <td><button id = "salvarMonitorButton" (click)="atualizarMonitor(attmonitor,a.cpf,i)">Salvar</button></td>
         </tr>
       </div>
