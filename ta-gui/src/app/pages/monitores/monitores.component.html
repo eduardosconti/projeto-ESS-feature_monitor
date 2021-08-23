@@ -23,6 +23,7 @@
         />
       </td>
       <td name="msgcpfexistente" *ngIf="cpfDuplicado"> </td>
+
     </tr>
     <tr>
       <td><label>e-mail </label></td>
@@ -36,11 +37,9 @@
         <input [(ngModel)]="monitor.github" name="githubbox" id="githubbox" />
       </td>
     </tr>
+    <td name="msgcpfvalido" *ngIf="cpfinvalido"></td>
+    <td name="emailinvalido" *ngIf="emailinvalido"></td>
   </table>
-  <div class="alert" name="sucessocadastro" *ngIf="inserido">
-    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-    Monitor inserido com sucesso.
-  </div>
 
 
 </div>

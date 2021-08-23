@@ -47,11 +47,15 @@ export class MonitoresComponent implements OnInit {
         this.cpfDuplicado = false;
         this.inserido = false;
       } else{
-        alert("ISSO NÃO É UM E-MAIL");
+        this.emailinvalido = true;
+        alert("Favor inserir um email válido.");
       }
     } else{
-      alert("ISSO NÃO É UM CPF");
+      this.cpfinvalido = true;
+      alert("Favor inserir um cpf válido.");
     }
+    this.cpfinvalido = false;
+    this.emailinvalido = false;
     
   }
 
@@ -82,10 +86,15 @@ export class MonitoresComponent implements OnInit {
     this.monitoresService.atualizar(a).subscribe((ad) => {
       if (ad) {
         var result: Monitor = this.monitores.find((k) => k.cpf == cpf);
-        result.nome = a.nome;
-        result.email = a.email;
-        result.github = a.github;
-        this.listaAlunos();
+        if (this.emailValido(a.email)) {
+          result.nome = a.nome;
+          result.email = a.email;
+          result.github = a.github;
+          this.listaAlunos();
+        } else {
+          this.emailinvalido = true;
+          alert("Favor inserir um email válido.");
+        }
       }
     });
     this.attmonitor = new Monitor();
