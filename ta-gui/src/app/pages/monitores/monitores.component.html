@@ -1,6 +1,6 @@
-<button (click)="esconderCadastro()">Cadastro</button>
+<html (mousemove) = "onMove()">
 
-<div id="divCadastro" class="divCadastro" style="display: none;">
+<div id="divCadastro" class="divCadastro">
   <table>
     <tr>
       <td><label>Nome </label></td>
@@ -22,7 +22,13 @@
           id="cpfbox"
         />
       </td>
-      <td name="msgcpfexistente" *ngIf="cpfDuplicado"> </td>
+      <div id= "msgsErro" class= "msgsErro">
+        <td name="msgcpfexistente" *ngIf="cpfDuplicado"> Ja existe um monitor cadastrado com esse CPF</td>
+        <td name="nomeinvalido" *ngIf="semNome">Por favor, insira um nome.</td>
+        <td name="msgcpfvalido" *ngIf="cpfinvalido">Por favor, insira um CPF válido. </td>
+        <td name="emailinvalido" *ngIf="emailinvalido">Favor inserir um email da instituição.</td>
+      </div>
+      
 
     </tr>
     <tr>
@@ -37,9 +43,6 @@
         <input [(ngModel)]="monitor.github" name="githubbox" id="githubbox" />
       </td>
     </tr>
-    <td name="msgcpfvalido" *ngIf="cpfinvalido"></td>
-    <td name="emailinvalido" *ngIf="emailinvalido"></td>
-    <td name="nomeinvalido" *ngIf="semNome"></td>
   </table>
 
 
@@ -58,6 +61,7 @@
       <td name="emaillist">{{ a.email }}</td>
       <td><button (click)="removerMonitor(a)">Remover</button></td>
       <td><button (click)="atualizar(a,i)" class = "attButton" id = "attButton">Atualizar</button></td>
+      <td name="tentouAtualizar" *ngIf="tentouAtualizar">Favor concluir atualização.</td>
       
       
       <div class="divAtualizar" *ngIf = "(!check || atualizando[i]) && a.cpf == attmonitor.cpf"> 
@@ -91,3 +95,4 @@
     </tr>
   </table>
 </div>
+</html>

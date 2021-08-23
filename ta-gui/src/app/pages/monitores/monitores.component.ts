@@ -19,6 +19,7 @@ export class MonitoresComponent implements OnInit {
   cpfinvalido: boolean = false;
   emailinvalido: boolean = false;
   semNome: boolean = false;
+  tentouAtualizar: boolean = false;
 
 
   constructor(
@@ -37,33 +38,24 @@ export class MonitoresComponent implements OnInit {
                 this.listaAlunos();
                 this.monitor = new Monitor();
                 this.atualizando.push(false);
-                this.inserido = true;
             } else {
               this.cpfDuplicado = true;
-              alert("Já existe um aluno com esse CPF.")
             }
           },
           (msg) => {
             alert(msg.message);
           }
           );
-          this.cpfDuplicado = false;
-          this.inserido = false;
         } else{
           this.emailinvalido = true;
-          alert("Favor inserir um email válido.");
         }
       } else{
         this.cpfinvalido = true;
-        alert("Favor inserir um cpf válido.");
       }
-      this.cpfinvalido = false;
-      this.emailinvalido = false;
   } else {
     this.semNome = true;
-    alert("Favor inserir nome do monitor.");
   }
-  this.semNome = false;
+ 
 
 }
 
@@ -78,7 +70,7 @@ export class MonitoresComponent implements OnInit {
       }
     });
   } else {
-    alert("Por favor, finalize as atualizações pendentes antes de remover aluno.")
+    this.tentouAtualizar = true;
   }
   }
   atualizar(a: Monitor, i: number): void {
@@ -87,21 +79,24 @@ export class MonitoresComponent implements OnInit {
     this.attmonitor = Object.assign({}, a);
     this.atualizando[i] = true;
   } else {
-    alert("Favor salvar atualização.")
+    this.tentouAtualizar = true;
   }
   }
   atualizarMonitor(a: Monitor, cpf: String, i: number): void {
     this.monitoresService.atualizar(a).subscribe((ad) => {
       if (ad) {
         var result: Monitor = this.monitores.find((k) => k.cpf == cpf);
-        if (this.emailValido(a.email)) {
-          result.nome = a.nome;
-          result.email = a.email;
-          result.github = a.github;
-          this.listaAlunos();
+        if (a.nome.length > 0) {
+          if (this.emailValido(a.email)) {
+            result.nome = a.nome;
+            result.email = a.email;
+            result.github = a.github;
+            this.listaAlunos();
+          } else {
+            this.emailinvalido = true;
+          }
         } else {
-          this.emailinvalido = true;
-          alert("Favor inserir um email válido.");
+          this.semNome = true;
         }
       }
     });
@@ -111,7 +106,10 @@ export class MonitoresComponent implements OnInit {
 
   onMove(): void {
     this.cpfDuplicado = false;
-    console.log(this.cpfDuplicado);
+    this.emailinvalido = false;
+    this.semNome = false;
+    this.cpfinvalido = false;
+    this.tentouAtualizar = false;
   }
 
   listaAlunos(): void {
@@ -175,14 +173,6 @@ export class MonitoresComponent implements OnInit {
         alert(msg.message);
       }
     );
-  }
-  esconderCadastro() {
-    var x = document.getElementById('divCadastro');
-    if (x.style.display == 'none') {
-      x.style.display = 'block';
-    } else {
-      x.style.display = 'none';
-    }
   }
   esconderAtualizacao() {
     var x = document.getElementById('divAtualizar');
