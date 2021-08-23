@@ -28,7 +28,7 @@ export class MonitoresComponent implements OnInit {
   ) {}
 
   criarMonitor(a: Monitor): void {
-    if (a.nome.length > 0) {
+    if ((typeof a.nome !== 'undefined') &&a.nome.length > 0) {
       if (this.cpfValido(a.cpf)){
         if(this.emailValido(a.email)) {
           this.monitoresService.criar(a).subscribe(
