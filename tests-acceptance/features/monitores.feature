@@ -15,6 +15,20 @@ When tento cadastrar o monitor "Lucas Silva" com CPF "14323456700" e email "luca
 Then nao vejo o monitor "Lucas Silva" com CPF "14323456700" e email "lucas@cin.ufpe.br" na lista de monitores
 And vejo uma mensagem de erro
 
+Scenario: Cadastro de monitor sem CPF
+Given estou na pagina de monitor
+And nao vejo o monitor "Lucas Silva" com CPF "14323456700" e email "lucas@cin.ufpe.br" na lista de monitores
+When tento cadastrar o monitor "Lucas Silva" sem CPF e email "lucas@cin.ufpe.br"
+Then nao vejo o monitor "Lucas Silva" com CPF "14323456700" e email "lucas@cin.ufpe.br" na lista de monitores
+And vejo uma mensagem de  erro
+
+Scenario: Cadastro de monitor com CPF invalido
+Given estou na pagina de monitor
+Given nao vejo o monitor "Lucas Silva" com CPF "14323456700" e email "lucas@cin.ufpe.br" na lista de monitores
+When tento cadastrar o monitor "Lucas Silva" com CPF "2" e email "lucas@cin.ufpe.br"
+Then nao vejo o monitor "Lucas Silva" com CPF "2" e email "lucas@cin.ufpe.br" na lista de monitores
+And vejo uma mensagem de  erro
+
 Scenario: Remocao de monitor com sucesso
 Given estou na pagina de monitor
 Given vejo o monitor "Gislayne Vitorino" com CPF "14323456701" e email "gislayne@cin.ufpe.br" na lista de monitores

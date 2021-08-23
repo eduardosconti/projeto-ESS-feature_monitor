@@ -56,6 +56,11 @@ defineSupportCode(function ({ Given, When, Then }) {
       await element.all(by.buttonText('Remover')).click();
       await element.all(by.buttonText('Remover')).click();
   });
+    When(/^tento cadastrar o monitor "([^\"]*)" sem CPF e email "([^\"]*)"$/, async (name, email) => {
+    await $("input[name='namebox']").sendKeys(<string> name);
+    await $("input[name='emailbox']").sendKeys(<string> email);
+    await element(by.buttonText('Adicionar')).click();
+  });
     
     Then(/^vejo "([^\"]*)" com CPF "(\d*)" e email "([^\"]*)" na lista de monitores$/, async (name, cpf, email) => {
   
@@ -92,6 +97,11 @@ defineSupportCode(function ({ Given, When, Then }) {
         await allmsgs.then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
         
   });
+  Then(/^vejo uma mensagem de  erro$/, async () => {
 
+    var allmsgs : ElementArrayFinder = element.all(by.name('msgcpfvalido'));
+    await allmsgs.then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
+    
+});
 });
 
