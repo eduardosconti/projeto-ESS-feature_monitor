@@ -28,7 +28,7 @@ export class MonitoresComponent implements OnInit {
   ) {}
 
   criarMonitor(a: Monitor): void {
-    if (a.nome.length > 0) {
+    if ((typeof a.nome !== 'undefined') &&a.nome.length > 0) {
       if (this.cpfValido(a.cpf)){
         if(this.emailValido(a.email)) {
           this.monitoresService.criar(a).subscribe(
@@ -72,7 +72,8 @@ export class MonitoresComponent implements OnInit {
   } else {
     this.tentouAtualizar = true;
   }
-  }
+}
+
   atualizar(a: Monitor, i: number): void {
     this.check = this.atualizando.some(v => v === true);
     if (!this.check){
@@ -83,26 +84,26 @@ export class MonitoresComponent implements OnInit {
   }
   }
   atualizarMonitor(a: Monitor, cpf: String, i: number): void {
-    this.monitoresService.atualizar(a).subscribe((ad) => {
-      if (ad) {
-        var result: Monitor = this.monitores.find((k) => k.cpf == cpf);
-        if (a.nome.length > 0) {
-          if (this.emailValido(a.email)) {
-            result.nome = a.nome;
-            result.email = a.email;
-            result.github = a.github;
-            this.listaAlunos();
-          } else {
-            this.emailinvalido = true;
+    if (a.nome.length > 0) {
+      if (this.emailValido(a.email)) {
+        this.monitoresService.atualizar(a).subscribe((ad) => {
+          if (ad) {
+            var result: Monitor = this.monitores.find((k) => k.cpf == cpf);
+                result.nome = a.nome;
+                result.email = a.email;
+                result.github = a.github;
+                this.listaAlunos();        
           }
-        } else {
-          this.semNome = true;
-        }
-      }
-    });
-    this.attmonitor = new Monitor();
-    this.atualizando[i] = false;
+        });
+        this.attmonitor = new Monitor();
+        this.atualizando[i] = false;
+    } else {
+      this.emailinvalido = true;
+    }
+    } else {
+    this.semNome = true;
   }
+}
 
   onMove(): void {
     this.cpfDuplicado = false;
