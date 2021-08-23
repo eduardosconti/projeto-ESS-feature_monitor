@@ -17,7 +17,6 @@ export class Monitor extends Aluno{
         this.email = from.email;
         this.github = from.github;       
         this.alunos = from.alunos;
-        //this.copyMonitorFrom(from.alunos);
     }
     copyMonitorFrom(from:Array<string>):void{
         this.alunos = new Array<string>();
