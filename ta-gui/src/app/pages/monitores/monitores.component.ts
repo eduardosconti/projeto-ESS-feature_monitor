@@ -16,6 +16,8 @@ export class MonitoresComponent implements OnInit {
   atualizando: boolean[] = [];
   check: boolean = false;
   inserido: boolean = false;
+  cpfinvalido: boolean = false;
+  emailinvalido: boolean = false;
 
   constructor(
     private monitoresService: MonitorService,
